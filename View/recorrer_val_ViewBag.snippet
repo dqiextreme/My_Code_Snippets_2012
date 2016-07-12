@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>recorrer_val_ViewBag</Title>
+      <Author>ASENIOR</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>res</ID>
+          <ToolTip>nombre_variable_generada_en_controller</ToolTip>
+          <Default>res</Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="html" Delimiter="$"><![CDATA[<table>
+@foreach (var item in ViewBag.$res$)
+{
+    <tr>
+        <td>@item.ID</td>
+        <td>@item.Archivo</td>
+        <td>@item.Ruta</td>
+    </tr>
+    
+}
+</table>]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
