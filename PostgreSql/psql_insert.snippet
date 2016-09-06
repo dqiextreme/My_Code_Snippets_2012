@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>SnippetFile1</Title>
+      <Author>ASENIOR</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Code Language="csharp" Delimiter="$"><![CDATA[//using Npgsql;
+public static string conexion = string.Format("Server=localhost;Port=5432;User Id=Joec;Password=joec2107;Database=Test_Psql1;");
+public NpgsqlConnection conn2 = new NpgsqlConnection(conexion);
+public NpgsqlDataAdapter psqlad;
+
+//val = "(1,'newval1'),(2,'newval2')"
+
+public bool psql_insert(string tabl, string val)
+{
+    string query = "INSERT INTO \"" + tabl + "\" VALUES " + val;
+    conn2.Open();
+    NpgsqlCommand cmd = new NpgsqlCommand(query, conn2);
+    cmd.ExecuteNonQuery();
+    cmd.Dispose();
+    conn2.Close();
+    return true;
+}]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
