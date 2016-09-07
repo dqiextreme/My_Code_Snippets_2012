@@ -5,7 +5,7 @@
       <SnippetTypes>
         <SnippetType>Expansion</SnippetType>
       </SnippetTypes>
-      <Title>SnippetFile1</Title>
+      <Title>psql_execute_query_No_result</Title>
       <Author>ASENIOR</Author>
       <Description>
       </Description>
@@ -15,21 +15,44 @@
       </Shortcut>
     </Header>
     <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>query</ID>
+          <ToolTip>que a ejecutar</ToolTip>
+          <Default>query</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>conn2</ID>
+          <ToolTip>conn npgsql</ToolTip>
+          <Default>conn2</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>conexion</ID>
+          <ToolTip>cadena de conexion</ToolTip>
+          <Default>conexion</Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
       <Code Language="csharp" Delimiter="$"><![CDATA[//using Npgsql;
-public static string conexion = string.Format("Server=localhost;Port=5432;User Id=Joec;Password=joec2107;Database=Test_Psql1;");
-public NpgsqlConnection conn2 = new NpgsqlConnection(conexion);
+public static string $conexion$ = string.Format("Server=localhost;Port=5432;User Id=Joec;Password=joec2107;Database=Test_Psql1;");
+public NpgsqlConnection $conn2$ = new NpgsqlConnection($conexion$);
 public NpgsqlDataAdapter psqlad;
 
 //string tabl = "Test1";
-//string query = "INSERT INTO \"" + tabl + "\" VALUES (1,'newval1'),(2,'newval2')";
+//string $query$ = "INSERT INTO \"" + tabl + "\" VALUES (1,'newval1'),(2,'newval2')";
 
-public void psql_query(string query)
+public void psql_query(string $query$)
 {
-    conn2.Open();
+    $conn2$.Open();
 
-    NpgsqlCommand cmd = new NpgsqlCommand(query, conn2);
+    NpgsqlCommand cmd = new NpgsqlCommand($query$, $conn2$);
 
-    cmd.ExecuteNonQuery(); cmd.Dispose(); conn2.Close();
+    cmd.ExecuteNonQuery(); cmd.Dispose(); $conn2$.Close();
 }]]></Code>
     </Snippet>
   </CodeSnippet>

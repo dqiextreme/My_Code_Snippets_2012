@@ -5,7 +5,7 @@
       <SnippetTypes>
         <SnippetType>Expansion</SnippetType>
       </SnippetTypes>
-      <Title>SnippetFile1</Title>
+      <Title>psql_select_DS</Title>
       <Author>ASENIOR</Author>
       <Description>
       </Description>
@@ -15,16 +15,24 @@
       </Shortcut>
     </Header>
     <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>tabl</ID>
+          <ToolTip>tabla consulta</ToolTip>
+          <Default>tabl</Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
       <Code Language="csharp" Delimiter="$"><![CDATA[//using Npgsql;
 public static string conexion = string.Format("Server=localhost;Port=5432;User Id=Joec;Password=joec2107;Database=Test_Psql1;");
 public NpgsqlConnection conn2 = new NpgsqlConnection(conexion);
 public NpgsqlDataAdapter psqlad;
 
-public DataSet psql_select_DS()
+public DataSet psql_select_DS(string $tabl$)
 {
     DataSet ds = new DataSet();
-    string tabl = "Test1";
-    string query = "SELECT * FROM \"" + tabl + "\"";
+    string query = "SELECT * FROM \"" + $tabl$ + "\"";
     psqlad = new NpgsqlDataAdapter(query, conn2);
     psqlad.Fill(ds);
     return ds;

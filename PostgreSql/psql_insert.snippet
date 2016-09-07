@@ -5,7 +5,7 @@
       <SnippetTypes>
         <SnippetType>Expansion</SnippetType>
       </SnippetTypes>
-      <Title>SnippetFile1</Title>
+      <Title>psql_insert</Title>
       <Author>ASENIOR</Author>
       <Description>
       </Description>
@@ -15,16 +15,32 @@
       </Shortcut>
     </Header>
     <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>tabl</ID>
+          <ToolTip>nombre tabla</ToolTip>
+          <Default>tabl</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>val</ID>
+          <ToolTip>valores (x1,y1), (x2,y2)</ToolTip>
+          <Default>val</Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
       <Code Language="csharp" Delimiter="$"><![CDATA[//using Npgsql;
 public static string conexion = string.Format("Server=localhost;Port=5432;User Id=Joec;Password=joec2107;Database=Test_Psql1;");
 public NpgsqlConnection conn2 = new NpgsqlConnection(conexion);
 public NpgsqlDataAdapter psqlad;
 
-//val = "(1,'newval1'),(2,'newval2')"
+//$val$ = "(1,'newval1'),(2,'newval2')"
 
-public bool psql_insert(string tabl, string val)
+public bool psql_insert(string $tabl$, string $val$)
 {
-    string query = "INSERT INTO \"" + tabl + "\" VALUES " + val;
+    string query = "INSERT INTO \"" + $tabl$ + "\" VALUES " + $val$;
     conn2.Open();
     NpgsqlCommand cmd = new NpgsqlCommand(query, conn2);
     cmd.ExecuteNonQuery();
