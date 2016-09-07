@@ -20,7 +20,7 @@
     int a = 0;
     conn2.Open();
     //NpgsqlCommand cmd = new NpgsqlCommand(query, conn2);
-    NpgsqlCommand cmd = new NpgsqlCommand("SELECT COUNT(*) FROM \""+ tabl +"\"", conn2);
+    NpgsqlCommand cmd = new NpgsqlCommand("SELECT COUNT(*) FROM "+ tabl, conn2);
     NpgsqlDataReader read1;
     read1 = cmd.ExecuteReader();
     while (read1.Read()){

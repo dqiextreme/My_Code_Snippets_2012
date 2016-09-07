@@ -40,7 +40,7 @@ public NpgsqlDataAdapter psqlad;
 
 public bool psql_insert(string $tabl$, string $val$)
 {
-    string query = "INSERT INTO \"" + $tabl$ + "\" VALUES " + $val$;
+    string query = "INSERT INTO " + $tabl$ + " VALUES " + $val$;
     conn2.Open();
     NpgsqlCommand cmd = new NpgsqlCommand(query, conn2);
     cmd.ExecuteNonQuery();

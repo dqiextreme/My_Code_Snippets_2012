@@ -24,7 +24,7 @@ public List<System.Data.DataRow> psql_select()
 {
     DataSet ds = new DataSet();
     string tabl = "Test1";
-    string query = "SELECT * FROM \"" + tabl + "\"";
+    string query = "SELECT * FROM " + tabl;
     psqlad = new NpgsqlDataAdapter(query, conn2);
     psqlad.Fill(ds);
 

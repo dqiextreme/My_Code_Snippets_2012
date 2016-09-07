@@ -46,7 +46,7 @@ public NpgsqlDataAdapter $psqlad$;
 public void psql_insert_parametros()
 {
     string tabl = "Test1";
-    string query = "INSERT INTO \"" + tabl + "\" VALUES (@id,@texto)";
+    string query = "INSERT INTO " + tabl + " VALUES (@id,@texto)";
     
     $conn2$.Open();
     NpgsqlCommand cmd = new NpgsqlCommand();
