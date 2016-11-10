@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>Query_Export_Xlsx</Title>
+      <Author>ASENIOR</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Code Language="csharp" Delimiter="$"><![CDATA[#region ActionResult de Exportar
+
+private IEnumerable<ProductosDescarga> ProductosDescarga(string pStrComp, string pStrUsuario)
+{
+    var oProductosDescarga = new List<ProductosDescarga>();
+    oProductosDescarga.AddRange(_oModelos.VST_T3_PRODUCTO_DESCARGA.Where(
+        x =>
+            x.ccompany == pStrComp && x.cvendedor == pStrUsuario).ToList().Select(producto => new ProductosDescarga
+            {
+                Producto = producto.cproducto,
+                Descripcion = producto.cnamefc,
+                Pmv = producto.cprecioventamax,
+                Marca = producto.cname,
+                Proveedor = producto.c_nomb_comer
+            }));
+    return oProductosDescarga;
+}
+
+[Authorize]
+public ActionResult Exportar()
+{
+    var oProductos = ProductosDescarga(Session["strCompUsuaro"].ToString(), User.Identity.Name);
+    var oHssfWorkbook = new HSSFWorkbook();
+    var oSheet = oHssfWorkbook.CreateSheet();
+    //(Opcional) Setea el Ancho de la Columna
+    oSheet.SetColumnWidth(0, 30 * 256);
+    oSheet.SetColumnWidth(1, 30 * 256);
+    oSheet.SetColumnWidth(2, 30 * 256);
+    oSheet.SetColumnWidth(3, 30 * 256);
+    oSheet.SetColumnWidth(4, 30 * 256);
+    //Crear el Encabezado
+    var oPrimeraFila = oSheet.CreateRow(0);
+    //Coloca los Nombres del Encabezado
+    oPrimeraFila.CreateCell(0).SetCellValue("Producto");
+    oPrimeraFila.CreateCell(1).SetCellValue("Descripción");
+    oPrimeraFila.CreateCell(2).SetCellValue("PMV");
+    oPrimeraFila.CreateCell(3).SetCellValue("Marca");
+    oPrimeraFila.CreateCell(4).SetCellValue("Proveedor");
+    //(Opcional) 'Congela' en Encabezado
+    oSheet.CreateFreezePane(0, 1, 0, 1);
+    var intIndex = 1;
+    //Llena los Datos
+    foreach (var oProducto in oProductos)
+    {
+        //Crea nuevo registro en la Hoja
+        var oFila = oSheet.CreateRow(intIndex++);
+        //Setea los Valores
+        oFila.CreateCell(0).SetCellValue(oProducto.Producto);
+        oFila.CreateCell(1).SetCellValue(oProducto.Descripcion);
+        oFila.CreateCell(2).SetCellValue((double)oProducto.Pmv.GetValueOrDefault());
+        oFila.CreateCell(3).SetCellValue(oProducto.Marca);
+        oFila.CreateCell(4).SetCellValue(oProducto.Proveedor);
+    }
+    //Escribe en el Libro lo que esta en Memoria
+    var oMemoryStream = new MemoryStream();
+    oHssfWorkbook.Write(oMemoryStream);
+    //Restorna
+    return File(oMemoryStream.ToArray(), //Dato Binarios del XLS
+        "application/vnd.ms-excel", //MIME de archivos Excel
+        "Productos.xls"); //Nombre del Archivo
+}
+#endregion]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>Dynamic_List</Title>
+      <Author>ASENIOR</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Code Language="csharp" Delimiter="$"><![CDATA[//Genero una lista generica, que se carga al inicio del formulario y puede ser utilizada en cualquier parte del formulario como un List<> normal
+
+dynamic Gen_Mas2;
+Type Gen_Type;
+Type Gen_ListType;
+IList Gen_List;
+        
+public Nombre_cs()
+{
+    //genero una lista generica accesible desde cualquier parte del formulario
+    InitializeComponent();
+    Gen_Mas2 = msqldb.msqldb_Select("", "").ToList().Select(x => new
+    {
+        Valor_1 = x.Field<string>("Valor_1"),
+        Valor_2 = x.Field<string>("Valor_2")
+    }).ToList();
+
+    Gen_Type = Gen_Mas2.GetType();
+    Gen_ListType = typeof(List<>).MakeGenericType(new[] { Gen_Type });
+    Gen_List = (IList)Activator.CreateInstance(Gen_ListType);
+    Gen_List = Gen_Mas2;
+}]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

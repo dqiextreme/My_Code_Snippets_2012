@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>Dynamic_List_2</Title>
+      <Author>ASENIOR</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Code Language="csharp" Delimiter="$"><![CDATA[//Genero una lista dynamica que puede accesar desde cualquier parte del formulario, es una lista de un solo grupo de valores, los mismo se accesa como Gen_Mas2.Valor_N°
+
+dynamic Gen_Mas2;
+
+public Nombre_cs()
+{
+    InitializeComponent();
+    Gen_Mas2 = msqldb.msqldb_Select("", "").ToList().Select(x => new
+    {
+        Valor_1 = x.Field<string>("Valor_1"),
+        Valor_2 = x.Field<string>("Valor_2")
+    }).ToList()[0];
+
+var a = Gen_Mas2.Valor_1;
+}]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
